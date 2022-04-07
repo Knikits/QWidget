@@ -27,8 +27,8 @@ class Widget : public QWidget
 {
     Q_OBJECT
 protected:
-    QFrame *frame;
-    QLabel *inputLabel;
+    QFrame *frame; // рамка
+    QLabel *inputLabel; // метка ввода
     QLineEdit *inputEdit; // строчный редактор ввода
     QLabel *outputLabel; // метка вывода
     QLineEdit *outputEdit; // строчный редактор вывода
@@ -36,8 +36,8 @@ protected:
     QPushButton *nextButton; // кнопка Следующее
     QPushButton *exitButton; // кнопка Выход
 public:
-    Widget(QWidget *parent = nullptr);
-    ~Widget();
+    Widget(QWidget *parent = nullptr); // конструтор
+    ~Widget(); // деструктор
 public slots:
     void begin(); // метод начальной настройки интерфейса
     void calc(); // метод реализации вычислений
