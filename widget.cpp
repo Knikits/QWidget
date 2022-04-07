@@ -40,39 +40,38 @@ Widget::Widget(QWidget *parent)
 }
 void Widget::begin()
 {
- inputEdit->clear();
- nextButton->setEnabled(false);
- nextButton->setDefault(false);
- inputEdit->setEnabled(true);
- outputLabel->setVisible(false);
- outputEdit->setVisible(false);
- outputEdit->setEnabled(false);
- inputEdit->setFocus();
+    inputEdit->clear();
+    nextButton->setEnabled(false);
+    nextButton->setDefault(false);
+    inputEdit->setEnabled(true);
+    outputLabel->setVisible(false);
+    outputEdit->setVisible(false);
+    outputEdit->setEnabled(false);
+    inputEdit->setFocus();
 }
 
 void Widget::calc()
 {
- bool Ok=true; float r,a;
- QString str=inputEdit->text();
- a=str.toDouble(&Ok);
- if (Ok)
- {
- r=a*a;
- str.setNum(r);
- outputEdit->setText(str);
- inputEdit->setEnabled(false);
- outputLabel->setVisible(true);
- outputEdit->setVisible(true);
- nextButton->setDefault(true);
- nextButton->setEnabled(true);
- nextButton->setFocus();
- }
- else
- if (!str.isEmpty())
- {
- QMessageBox msgBox(QMessageBox::Information,("Возведение в квадрат."),("Введено неверное значение."),QMessageBox::Ok);
- }
+    bool Ok=true; float r,a;
+    QString str=inputEdit->text();
+    a=str.toDouble(&Ok);
+    if (Ok) {
+        r=a*a;
+        str.setNum(r);
+        outputEdit->setText(str);
+        inputEdit->setEnabled(false);
+        outputLabel->setVisible(true);
+        outputEdit->setVisible(true);
+        nextButton->setDefault(true);
+        nextButton->setEnabled(true);
+        nextButton->setFocus();
+    }
+    else
+        if (!str.isEmpty()) {
+            QMessageBox msgBox(QMessageBox::Information,("Возведение в квадрат."),("Введено неверное значение."),QMessageBox::Ok);
+    }
 }
+
 Widget::~Widget()
 {
     delete ui;

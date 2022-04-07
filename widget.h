@@ -23,7 +23,6 @@ public:
         }
 };
 
-
 class Widget : public QWidget
 {
     Q_OBJECT
@@ -33,14 +32,15 @@ protected:
     QLineEdit *inputEdit; // строчный редактор ввода
     QLabel *outputLabel; // метка вывода
     QLineEdit *outputEdit; // строчный редактор вывода
+    QPushButton *calcButton; // кнопка Вычислить
     QPushButton *nextButton; // кнопка Следующее
     QPushButton *exitButton; // кнопка Выход
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 public slots:
- void begin(); // метод начальной настройки интерфейса
- void calc(); // метод реализации вычислений
+    void begin(); // метод начальной настройки интерфейса
+    void calc(); // метод реализации вычислений
 private:
     Ui::Widget *ui;
 };
