@@ -4,45 +4,22 @@
 #include <QWidget>
 #include <QtGui>
 #include <QFrame>
-#include <QLabel>
+#include <QLabel>     // компоненты
 #include <QLineEdit>
 #include <QPushButton>
-#include<QMessageBox>
+#include <QMessageBox>
+#include "area.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
 
-class StrValidator:public QValidator // класс компонента проверки ввода
+class Window : public QWidget
 {
-public:
-    StrValidator(QObject *parent):QValidator(parent){}
-    virtual State validate(QString &str,int &pos)const
-        {
-            return Acceptable; // метод всегда принимает вводимую строку
-        }
-};
-
-
-class Widget : public QWidget
-{
-    Q_OBJECT
 protected:
-    QFrame *frame;
-    QLabel *inputLabel;
-    QLineEdit *inputEdit; // строчный редактор ввода
-    QLabel *outputLabel; // метка вывода
-    QLineEdit *outputEdit; // строчный редактор вывода
-    QPushButton *nextButton; // кнопка Следующее
-    QPushButton *exitButton; // кнопка Выход
+    Area * area; // область отображения рисунка
+    QPushButton * btn;
 public:
-    Widget(QWidget *parent = nullptr);
-    ~Widget();
-public slots:
- void begin(); // метод начальной настройки интерфейса
- void calc(); // метод реализации вычислений
-private:
-    Ui::Widget *ui;
+    Window();
 };
-
 #endif // WIDGET_H
