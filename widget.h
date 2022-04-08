@@ -2,24 +2,21 @@
 #define WIDGET_H
 
 #include <QWidget>
-#include <QtGui>
-#include <QFrame>
-#include <QLabel>     // компоненты
-#include <QLineEdit>
+#include <QtGui>       // компоненты
 #include <QPushButton>
-#include <QMessageBox>
+
 #include "area.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
 
-class Window : public QWidget
+class Window : public QWidget // класс Window является наследником класса QWidget
 {
 protected:
     Area * area; // область отображения рисунка
-    QPushButton * btn;
+    QPushButton * btn; // кнопка завершить
 public:
-    Window();
+    Window(); // конструктор
 };
 #endif // WIDGET_H
