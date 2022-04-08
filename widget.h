@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QtGui>
 #include <QFrame>
-#include <QLabel>
+#include <QLabel>     // компоненты
 #include <QLineEdit>
 #include <QPushButton>
 #include <QMessageBox>
@@ -23,7 +23,7 @@ public:
         }
 };
 
-class Widget : public QWidget // класс окна
+class Widget : public QWidget // класс окна является наследником класса QWidget
 {
     Q_OBJECT // макрос Qt, обеспечивающий корректное создание сигналов и слотов
 protected:

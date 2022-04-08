@@ -1,15 +1,15 @@
 #include "widget.h"
 #include "ui_widget.h"
 
-Widget::Widget(QWidget *parent)
+Widget::Widget(QWidget *parent) // реализация конструктора
     : QWidget(parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this); // компилируем дизайн, который создан в ui
     setWindowTitle("Возведение в квадрат"); // название окна
-    frame = new QFrame(this); //
-    frame->setFrameShadow(QFrame::Raised); //
-    frame->setFrameShape(QFrame::Panel); //
+    frame = new QFrame(this);
+    frame->setFrameShadow(QFrame::Raised); // создаём фреймы  и настраиваем
+    frame->setFrameShape(QFrame::Panel);
     inputLabel = new QLabel("Введите число:", this); // создаём текстовое поле
     inputEdit = new QLineEdit("", this); // создаём поле ввода
     StrValidator *v=new StrValidator(inputEdit); // проверка правильности ввода
@@ -32,8 +32,8 @@ Widget::Widget(QWidget *parent)
     vLayout2->addWidget(exitButton); // кнопка для выхода
     vLayout2->addStretch(); // убирает пространоство между кнопками
     QHBoxLayout *hLayout = new QHBoxLayout(this); // создание горизонтального макета
-    hLayout->addWidget(frame); //
-    hLayout->addLayout(vLayout2); //
+    hLayout->addWidget(frame); // добавляем фрейм
+    hLayout->addLayout(vLayout2); // добавляем вертикальное поле2
     begin(); // метод начальной настройки интерфейса
     connect(calcButton,SIGNAL(clicked(bool)), this,SLOT(calc())); // сигнал нажатия кнопки Вычислить
     connect(exitButton,SIGNAL(clicked(bool)), this,SLOT(close())); // сигнал нажатия кнопки Выход
