@@ -7,7 +7,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
-#include<QMessageBox>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -23,9 +23,9 @@ public:
         }
 };
 
-class Widget : public QWidget
+class Widget : public QWidget // класс окна
 {
-    Q_OBJECT
+    Q_OBJECT // макрос Qt, обеспечивающий корректное создание сигналов и слотов
 protected:
     QFrame *frame; // рамка
     QLabel *inputLabel; // метка ввода

@@ -5,7 +5,7 @@ Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
 {
-    ui->setupUi(this);
+    ui->setupUi(this); // компилируем дизайн, который создан в ui
     setWindowTitle("Возведение в квадрат"); // название окна
     frame = new QFrame(this); //
     frame->setFrameShadow(QFrame::Raised); //
@@ -35,9 +35,9 @@ Widget::Widget(QWidget *parent)
     hLayout->addWidget(frame); //
     hLayout->addLayout(vLayout2); //
     begin(); // метод начальной настройки интерфейса
-    connect(calcButton,SIGNAL(clicked(bool)), this,SLOT(calc())); //
-    connect(exitButton,SIGNAL(clicked(bool)), this,SLOT(close())); //
-    connect(nextButton,SIGNAL(clicked(bool)), this,SLOT(begin())); //
+    connect(calcButton,SIGNAL(clicked(bool)), this,SLOT(calc())); // сигнал нажатия кнопки Вычислить
+    connect(exitButton,SIGNAL(clicked(bool)), this,SLOT(close())); // сигнал нажатия кнопки Выход
+    connect(nextButton,SIGNAL(clicked(bool)), this,SLOT(begin())); // сигнал нажатия кнопки Следующее
     connect(inputEdit,SIGNAL(returnPressed()), this,SLOT(calc())); // сигнал нажатия клавиши Enter
 
 }
@@ -45,7 +45,7 @@ void Widget::begin() // метод начальной настройки инт�
 {
     inputEdit->clear(); // очистка поля
     nextButton->setEnabled(false); // кнопка Следующее становится выключеной
-    nextButton->setDefault(false); //
+    nextButton->setDefault(false); // кнопка Следующее не по умолчанию
     inputEdit->setEnabled(true); // поле ввода становится доступным
     outputLabel->setVisible(false); // текст Результат пропадает
     outputEdit->setVisible(false); // поле вывода пропадает
@@ -55,23 +55,24 @@ void Widget::begin() // метод начальной настройки инт�
 
 void Widget::calc() // метод реализации вычислений
 {
-    bool Ok=true; // переменная типа bool присваивается true
+    bool Ok = true; // переменная типа bool присваивается true
     float r,a; // создаются переменные
-    QString str=inputEdit->text(); //
-    a=str.toDouble(&Ok); //
-    if (Ok) { //
+    QString str=inputEdit->text(); // берёт все, что было написано в поле ввода
+    a = str.toDouble(&Ok); // преобразовываем str в тип float, проверка преобразования в переменной ok
+    if (Ok) { // если ok true, то
         r=a*a; // операция возведения в квадрат
-        str.setNum(r); //
-        outputEdit->setText(str); //
-        inputEdit->setEnabled(false);
+        str.setNum(r); // преобразование r в QString и сразу записываем в переменную Str
+        outputEdit->setText(str); // в поле вывода записываем str
+        inputEdit->setEnabled(false); // поле ввода становится недоступным
         outputLabel->setVisible(true); // поле остаётся видимым
         outputEdit->setVisible(true); // поле остаётся видимым
-        nextButton->setDefault(true); // кнопка становится доступной
-        nextButton->setEnabled(true); //
+        nextButton->setDefault(true); // кнопка становится по умолчанию
+        nextButton->setEnabled(true); // и становится доступной
         nextButton->setFocus(); // указатель ставится на кнопку Следующее
     }
-    else
+    else // если ввод некорректный
         if (!str.isEmpty()) { // если строка пуста
+            // окно с предупреждением
             QMessageBox msgBox(QMessageBox::Information,("Возведение в квадрат."),("Введено неверное значение."),QMessageBox::Ok);
             msgBox.exec(); // выводим сообщение
     }
