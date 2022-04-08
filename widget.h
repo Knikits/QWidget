@@ -7,42 +7,41 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
-#include<QMessageBox>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Widget; }
+namespace Ui { class Counter; }
 QT_END_NAMESPACE
 
-class StrValidator:public QValidator // класс компонента проверки ввода
+class Counter : public QLineEdit
 {
+    Q_OBJECT
 public:
-    StrValidator(QObject *parent):QValidator(parent){}
-    virtual State validate(QString &str,int &pos)const
-        {
-            return Acceptable; // метод всегда принимает вводимую строку
-        }
+    Counter(const QString & contents, QWidget *parent=0): QLineEdit(contents,parent){}
+signals:
+    void tick_signal();
+public slots:
+    void add_one()
+    {
+        QString str = text();
+        int r=str.toInt();
+        if (r!=0 && r%5 ==0) emit tick_signal();
+        r++;
+        str.setNum(r);
+        setText(str);
+     }
 };
 
-
-class Widget : public QWidget
+class Widget: public QWidget
 {
     Q_OBJECT
 protected:
-    QFrame *frame;
-    QLabel *inputLabel;
-    QLineEdit *inputEdit; // строчный редактор ввода
-    QLabel *outputLabel; // метка вывода
-    QLineEdit *outputEdit; // строчный редактор вывода
-    QPushButton *nextButton; // кнопка Следующее
-    QPushButton *exitButton; // кнопка Выход
+    QLabel *label1, *label2;
+    Counter *edit1, *edit2;
+    QPushButton *calcbutton;
+    QPushButton *exitbutton;
 public:
-    Widget(QWidget *parent = nullptr);
-    ~Widget();
-public slots:
- void begin(); // метод начальной настройки интерфейса
- void calc(); // метод реализации вычислений
-private:
-    Ui::Widget *ui;
+    Widget(QWidget *parent = 0);
 };
 
 #endif // WIDGET_H
